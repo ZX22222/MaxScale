@@ -8,7 +8,7 @@ bdds=("SLT10670" "SLT10671")
 maxscales=("SLT10673" "SLT10674")
  
 ### TEMPORARY LOG ###
-output_file="/home/zabbix/scripts/check_cluster.log"
+output_file="/home/zabbix/check_cluster.log"
 [ -f "$output_file" ] && rm "$output_file"
  
 ### BDD STATUS CHECK ###
