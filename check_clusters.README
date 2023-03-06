@@ -1,0 +1,15 @@
+Script de vérification et de contrôle de l'état des services MariaDB, MaxScale, et Galera sur les clusters.
+
+Configuration
+
+Pour utiliser ce script, vous devez modifier les variables bdds et maxscales pour refléter les noms des nœuds que vous souhaitez vérifier.
+ATTENTION : Les noms des machines est aussi a modifier plus en profondeur dans le script, et non seulement dans les variables.
+
+Utilisation
+
+Le script peut être executé sur n'importe quelle machine.
+
+Le script peut être exécuté avec la commande suivante :
+bash nom_du_script.sh
+
+Si l'un des services ne fonctionne pas correctement, le script affichera un avertissement.
