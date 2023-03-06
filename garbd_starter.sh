@@ -2,6 +2,8 @@
 
 red='\033[0;31m';green='\033[0;32m';yellow='\033[0;33m';cyan='\033[0;36m';clean='\033[0m';
 
+galera_conf='/etc/my.cnf.d/galera.cnf'
+
 is_running() {
         printf "${yellow}Please start this script on the second maxscale node\n"
         printf "to make sure the arbitrator IS running on it${clean}\n\n"
@@ -14,7 +16,7 @@ is_not_running() {
 
 if pgrep maxscale &>/dev/null; then
         printf "\nMaxScale is ${green}RUNNING${clean}\n"
-        if pgrep -f 'garbd -c /etc/my.cnf.d/galera.cnf -d' &>/dev/null; then
+        if pgrep -f 'garbd -c '$galera_conf' -d' &>/dev/null; then
                 printf "Galera Arbitrator is ${green}RUNNING${clean}"
                 printf " -> ${cyan}CHECK OK${clean}\n\n"
                 is_not_running
@@ -22,8 +24,8 @@ if pgrep maxscale &>/dev/null; then
                 printf "Galera Arbitrator is ${red}NOT RUNNING${clean}"
                 printf " -> ${yellow}CHECK NOT OK${clean}\n\n"
                 printf "${yellow}Starting Galera Arbitrator${clean}\n"
-                garbd -c /etc/my.cnf.d/galera.cnf -d
-                if pgrep -f 'garbd -c /etc/my.cnf.d/galera.cnf -d' &>/dev/null; then
+                garbd -c $galera_conf -d
+                if pgrep -f 'garbd -c '$galera_conf' -d' &>/dev/null; then
                         printf "Galera Arbitrator is ${green}RUNNING${clean}"
                         printf " -> ${cyan}RESTART SUCCEED${clean}\n\n"
                         is_not_running
@@ -35,12 +37,12 @@ if pgrep maxscale &>/dev/null; then
         fi
 else
         printf "\nMaxScale is ${yellow}NOT RUNNING${clean}\n"
-        if pgrep -f 'garbd -c /etc/my.cnf.d/galera.cnf -d' &>/dev/null; then
+        if pgrep -f 'garbd -c '$galera_conf' -d' &>/dev/null; then
                 printf "Galera Arbitrator is ${red}RUNNING${clean}"
                 printf " -> ${yellow}CHECK NOT OK${clean}\n\n"
                 printf "${yellow}Stopping Galera Arbitrator${clean}\n"
-                kill -9 $(pgrep -f 'garbd -c /etc/my.cnf.d/galera.cnf -d')
-                if pgrep -f 'garbd -c /etc/my.cnf.d/galera.cnf -d' &>/dev/null; then
+                kill -9 $(pgrep -f 'garbd -c '$galera_conf' -d')
+                if pgrep -f 'garbd -c '$galera_conf' -d' &>/dev/null; then
                         printf "Galera Arbitrator is ${red}RUNNING${clean}"
                         printf " -> ${red}STOP FAILED${clean}\n\n"
                         printf "${yellow}Please kill the arbitrator process manually${clean}\n"
