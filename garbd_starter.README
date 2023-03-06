@@ -1,0 +1,19 @@
+Script de vérification et de contrôle de l'arbitrator Galera sur le cluster MaxScale
+
+Ce script est utilisé pour vérifier si l'arbitrator Galera fonctionne correctement sur un nœud MaxScale donné.
+Si MaxScale est en cours d'exécution, le script vérifie si l'arbitre est également en cours d'exécution.
+Si l'arbitre n'est pas en cours d'exécution, le script tente de le démarrer.
+
+Si MaxScale n'est pas en cours d'exécution, le script vérifie si l'arbitre est en cours d'exécution.
+Si tel est le cas, le script tente de l'arrêter.
+
+Configuration
+
+L'emplacement du fichier de configuration galera peut etre changer dans la variable nommée "galera_conf" du script
+
+Utilisation
+
+Le script doit être exécuté sur les deux nœuds MaxScale pour s'assurer qu'il ne fonctionne que sur un seul noeud.
+
+Le script peut être exécuté avec la commande suivante :
+bash garbd_starter.sh
